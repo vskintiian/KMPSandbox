@@ -4,13 +4,26 @@ import SandboxSDK
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    let wrapper = GenericWrapper(value: "Wrapped String" as NSString)
+    let coroutinesTestExecutor = CoroutinesTest()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        let wrapper = GenericWrapper(value: "Wrapped String" as NSString)
         let value = wrapper.pull()
+        let job = coroutinesTestExecutor.executeInBackground(success: { _ in
+            print("Success: in thread - \(Thread.current)")
+        }) { _ in
+            print("Failure: in thread - \(Thread.current)")
+        }
+        
+        coroutinesTestExecutor.execute { (result, error) in
+            print("Result: \(result) and error: \(error) - in thread: \(Thread.current)")
+        }
+        
+        coroutinesTestExecutor.exec(string: "String from iOS") { (result, error) in
+            print("Result: \(result) and error: \(error) - in thread: \(Thread.current)")
+        }
         
         return true
     }

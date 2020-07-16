@@ -17,6 +17,9 @@ repositories {
     maven {
         url = uri("https://dl.bintray.com/kotlin/kotlin-eap")
     }
+    maven {
+        url = uri("https://dl.bintray.com/kotlin/kotlin-dev")
+    }
 }
 kotlin {
     android()
@@ -31,24 +34,37 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(kotlin("stdlib-common"))
+                implementation(kotlin("stdlib-common", "1.4-M2-eap-23"))
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7-native-mt-1.4-M2")
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7-native-mt-1.4-M2")
             }
         }
+
         val androidMain by getting {
             dependencies {
-                implementation(kotlin("stdlib-jdk7"))
+                implementation(kotlin("stdlib-jdk7", "1.4-M2-eap-23"))
                 implementation("androidx.core:core-ktx:1.2.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7-native-mt-1.4-M2")
             }
         }
         val androidTest by getting
-        val iosMain by getting
-        val iosTest by getting
+
+        val iosMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7-native-mt-1.4-M2")
+            }
+        }
+        val iosTest by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7-native-mt-1.4-M2")
+            }
+        }
     }
 
     cocoapods {
