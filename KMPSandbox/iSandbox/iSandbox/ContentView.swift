@@ -1,8 +1,11 @@
 import SwiftUI
+import SandboxSDK
 
 struct ContentView: View {
+    let testStringProvider = KotlinTestClass()
+    
     var body: some View {
-        Text("Hello, World!")
+        Text(testStringProvider.expectedString())
     }
 }
 

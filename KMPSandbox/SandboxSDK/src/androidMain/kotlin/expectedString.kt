@@ -1,0 +1,1 @@
+actual fun KotlinTestClass.expectedString(): String = "Expected Android String"
