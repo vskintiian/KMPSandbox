@@ -1,0 +1,16 @@
+PODS:
+  - SandboxSDK (0.1)
+
+DEPENDENCIES:
+  - SandboxSDK (from `../SandboxSDK/`)
+
+EXTERNAL SOURCES:
+  SandboxSDK:
+    :path: "../SandboxSDK/"
+
+SPEC CHECKSUMS:
+  SandboxSDK: 6c7b6727b41cdcea9c57931f8cd391d4c9eed0e8
+
+PODFILE CHECKSUM: dcc0a14c87ba97421c6ce333b68e6fbbf5e5f4be
+
+COCOAPODS: 1.9.1

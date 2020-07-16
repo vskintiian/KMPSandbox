@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin("multiplatform")
+    kotlin("native.cocoapods")
     id("com.android.library")
     id("kotlin-android-extensions")
 }
@@ -19,13 +20,14 @@ repositories {
 }
 kotlin {
     android()
-    iosX64("ios") {
-        binaries {
-            framework {
-                baseName = "SandboxSDK"
-            }
-        }
+
+    val iosTarget = System.getenv("SDK_NAME")?.startsWith("iphoneos") ?: false
+    if (iosTarget) {
+        iosArm64("ios")
+    } else {
+        iosX64("ios")
     }
+
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -48,6 +50,16 @@ kotlin {
         val iosMain by getting
         val iosTest by getting
     }
+
+    cocoapods {
+        // Configure fields required by CocoaPods.
+        summary = "Shared SandboxSDK module for both iOS and Android platforms"
+        homepage = "sandboxSDK.com"
+
+        // The name of the produced framework can be changed.
+        // The name of the Gradle project is used here by default.
+        frameworkName = "SandboxSDK"
+    }
 }
 android {
     compileSdkVersion(29)
@@ -63,14 +75,3 @@ android {
         }
     }
 }
-val packForXcode by tasks.creating(Sync::class) {
-    group = "build"
-    val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
-    val framework = kotlin.targets.getByName<KotlinNativeTarget>("ios").binaries.getFramework(mode)
-    inputs.property("mode", mode)
-    dependsOn(framework.linkTask)
-    val targetDir = File(buildDir, "xcode-frameworks")
-    from({ framework.outputDirectory })
-    into(targetDir)
-}
-tasks.getByName("build").dependsOn(packForXcode)
