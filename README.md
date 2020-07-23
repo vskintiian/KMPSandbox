@@ -30,3 +30,8 @@ A sandbox project to evaluate the Kotlin multiplatform capabilities
    or replace it with:
 
    `spec.static_framework         = false`
+
+
+   Errors:
+   - Invoke-customs are only supported starting with Android O (--min-api 26)
+   -- set 'minSdkVersion = 26' in 'android.defaultConfig.minSdkVersion' (https://github.com/google/ExoPlayer/issues/6913)

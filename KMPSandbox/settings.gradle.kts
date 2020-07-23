@@ -4,9 +4,9 @@ pluginManagement {
         gradlePluginPortal()
         google()
         jcenter()
-        maven {
-            url = uri("https://dl.bintray.com/kotlin/kotlin-eap")
-        }
+//        maven {
+//            url = uri("https://dl.bintray.com/kotlin/kotlin-eap")
+//        }
     }
     resolutionStrategy {
         eachPlugin {
@@ -17,7 +17,6 @@ pluginManagement {
     }
 }
 rootProject.name = "KMPSandbox"
-
 
 include(":SandboxSDK")
 include(":androidApp")
