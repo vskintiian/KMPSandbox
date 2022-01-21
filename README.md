@@ -6,6 +6,7 @@ A sandbox project to evaluate the Kotlin multiplatform capabilities
 #### To create gradlew file run in the root directory of the project
 `$ gradle wrapper --gradle-version 6.5.1`
 
+
 #### Configuring the project with cocoapods
 1. [Install](https://guides.cocoapods.org/using/getting-started.html#installation) CocoaPods.
    It's recommended to use CocoaPods 1.6.1 or higher.
